@@ -1,15 +1,17 @@
 {
   "name": "@houseid/rrule-helper",
   "version": "1.0.0",
-  "description": "",
+  "description": "Package for getting localized descriptive text from rrule",
   "main": "index.js",
   "scripts": {
     "test": "jest"
   },
-  "author": "",
+  "author": "House:ID AB",
   "license": "ISC",
-  "devDependencies": {
-    "jest": "^28.1.1",
+  "dependencies": {
     "rrule": "^2.7.0"
+  },
+  "devDependencies": {
+    "jest": "^28.1.1"    
   }
 }

@@ -2,24 +2,23 @@ const eachCounting = x => {
   switch(x) {
     case 1:  return { n: 'varje', t: 'varje' };
     case 2:  return { n: 'varannan', t: 'vartannat' };
-    case 3:  return { n: 'var tredje', t: 'vart tredje' };;
-    case 4:  return { n: 'var fjärde', t: 'vart fjärde' };;
-    case 5:  return { n: 'var femte', t: 'vart femte' };;
-    default: return { n: `var ${x}:e`, t: `vart ${x}:e` };;
+    case 3:  return { n: 'var tredje', t: 'vart tredje' };
+    case 4:  return { n: 'var fjärde', t: 'vart fjärde' };
+    case 5:  return { n: 'var femte', t: 'vart femte' };
+    default: return { n: `var ${x}:e`, t: `vart ${x}:e` };
   }
 }
 
-const counting = x => {
-  switch(x) {
-    case -1:  return 'sista';
-    case 1:  return 'första';
-    case 2:  return 'andra';
-    case 3:  return 'tredje';
-    case 4:  return 'fjärde';
-    case 5:  return 'femte';
-    default: return `${x}:e`;
-  }
-}
+const CountingMap = {
+  [-1]: 'sista',
+  [1]: 'första',
+  [2]: 'andra',
+  [3]: 'tredje',
+  [4]: 'fjärde',
+  [5]: 'femte',
+};
+
+const counting = x => CountingMap[x] || `${x}:e`;
 
 const weekdays = [
   { singular: 'måndag' },
@@ -65,17 +64,19 @@ const getMonthList = (bymonth) => {
   }
   return months[bymonth - 1];
 };
+
 const getWeekdaysList = (byweekday) => {
-  if(!byweekday || byweekday.length === 0) {
+  if (!byweekday?.length) {
     return '';
   }
 
-  return getListText(byweekday.map(w => {
-    if(!w.n) {
-      return weekdays[w.weekday].singular;
-    }
-    return `${counting(w.n)} ${weekdays[w.weekday].singular}en`;
-  }));
+  const listItems = byweekday
+    .map(item => item.n
+      ? `${counting(item.n)} ${weekdays[item.weekday].singular}en`
+      : weekdays[item.weekday].singular
+    );
+
+  return getListText(listItems);
 };
 
 const getMonthDaysList = (bymonthday) => {
@@ -88,7 +89,7 @@ const getMonthDaysList = (bymonthday) => {
   return `dag ${bymonthday}`;
 };
 
-const getMonthDaysList2 = (bymonthday) => {
+const getMonthDaysCountList = (bymonthday) => {
   if(!bymonthday) {
     return '';
   }
@@ -97,8 +98,6 @@ const getMonthDaysList2 = (bymonthday) => {
 };
 
 module.exports = rrule => {
-  console.log(rrule);
-
   const parts = [];
   
   if(rrule.freq === 3) { // DAILY
@@ -129,7 +128,7 @@ module.exports = rrule => {
   }
 
   if(rrule.freq === 0) { // YEARLY
-    const daylist = getMonthDaysList2(rrule.bymonthday);
+    const daylist = getMonthDaysCountList(rrule.bymonthday);
     if(daylist !== '') {
       parts.push(`den ${daylist}`);
     }   
