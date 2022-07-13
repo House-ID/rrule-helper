@@ -71,10 +71,15 @@ const getWeekdaysList = (byweekday) => {
   }
 
   const listItems = byweekday
-    .map(item => item.n
-      ? `${counting(item.n)} ${weekdays[item.weekday].singular}en`
-      : weekdays[item.weekday].singular
-    );
+    .map(item => {
+      if (typeof item === 'number') {
+        return weekdays[item].singular;
+      }
+
+      return item.n
+        ? `${counting(item.n)} ${weekdays[item.weekday].singular}en`
+        : weekdays[item.weekday].singular;
+    });
 
   return getListText(listItems);
 };
