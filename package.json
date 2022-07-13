@@ -1,6 +1,6 @@
 {
   "name": "@houseid/rrule-helper",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Package for getting localized descriptive text from rrule",
   "main": "index.js",
   "scripts": {
