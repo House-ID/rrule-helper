@@ -103,6 +103,10 @@ const getMonthDaysCountList = (bymonthday) => {
 };
 
 module.exports = rrule => {
+  if (!rrule) {
+    return '';
+  }
+
   const parts = [];
   
   if(rrule.freq === 3) { // DAILY
