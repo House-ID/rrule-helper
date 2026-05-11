@@ -1,5 +1,6 @@
-const toSwedish = require('./swedish');
-const { RRule } = require('rrule');
+import { test, expect } from 'vitest';
+import { RRule } from 'rrule';
+import { toSwedish } from '../swedish';
 
 test('Every day(s)', () => {
   expect(toSwedish(RRule.parseString('FREQ=DAILY'))).toBe('varje dag');
@@ -51,7 +52,7 @@ test('Every year(s)', () => {
   expect(toSwedish(RRule.parseString('FREQ=YEARLY;INTERVAL=8'))).toBe('vart 8:e år');
 });
 
-test('Every year(s)', () => {
+test('Every year(s) duplicate', () => {
   expect(toSwedish(RRule.parseString('FREQ=YEARLY'))).toBe('varje år');
   expect(toSwedish(RRule.parseString('FREQ=YEARLY;INTERVAL=1'))).toBe('varje år');
   expect(toSwedish(RRule.parseString('FREQ=YEARLY;INTERVAL=2'))).toBe('vartannat år');
