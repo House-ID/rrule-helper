@@ -26,7 +26,7 @@ npm install @house-id/rrule-helper
 	//npm.pkg.github.com/:_authToken=your_generated_token
  	```
 
-## Versioning and Releases
+## Versioning and Releases 
 We use `semantic-release` to automate version management and package publishing. Commits to the `main` branch trigger the release process based on Conventional Commits. ## Conventional Commits To determine the type of version bump needed (patch, minor, or major), `semantic-release` uses commit messages that adhere to the [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) specification. 
 
 
